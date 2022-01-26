@@ -3,7 +3,7 @@ package GoSNMPServer
 import "strings"
 import "fmt"
 import "sort"
-import "github.com/slayercat/gosnmp"
+import "github.com/gosnmp/gosnmp"
 import "github.com/pkg/errors"
 
 type SubAgent struct {
@@ -61,10 +61,9 @@ func (t *SubAgent) checkPermission(whichPDU *PDUValueControlItem, request *gosnm
 
 func (t *SubAgent) getPDU(Name string, Type gosnmp.Asn1BER, Value interface{}) gosnmp.SnmpPDU {
 	return gosnmp.SnmpPDU{
-		Name:   Name,
-		Type:   Type,
-		Value:  Value,
-		Logger: &SnmpLoggerAdapter{t.Logger},
+		Name:  Name,
+		Type:  Type,
+		Value: Value,
 	}
 }
 func (t *SubAgent) getPDUHelloVariable() gosnmp.SnmpPDU {
@@ -138,10 +137,9 @@ func (t *SubAgent) getForPDUValueControlResult(item *PDUValueControlItem,
 		return t.getPDUOctetString(item.OID, fmt.Sprintf("ERROR: %+v", err)), errret
 	}
 	return gosnmp.SnmpPDU{
-		Name:   item.OID,
-		Type:   item.Type,
-		Value:  valtoRet,
-		Logger: &SnmpLoggerAdapter{t.Logger},
+		Name:  item.OID,
+		Type:  item.Type,
+		Value: valtoRet,
 	}, gosnmp.NoError
 }
 
@@ -177,10 +175,9 @@ func (t *SubAgent) trapForPDUValueControlResult(item *PDUValueControlItem,
 		return t.getPDUOctetString(item.OID, fmt.Sprintf("ERROR: %+v", err)), errret
 	}
 	return gosnmp.SnmpPDU{
-		Name:   item.OID,
-		Type:   item.Type,
-		Value:  valtoRet,
-		Logger: &SnmpLoggerAdapter{t.Logger},
+		Name:  item.OID,
+		Type:  item.Type,
+		Value: valtoRet,
 	}, gosnmp.NoError
 }
 

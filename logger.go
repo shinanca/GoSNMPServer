@@ -1,6 +1,8 @@
 package GoSNMPServer
 
-import "os"
+import (
+	"os"
+)
 import "github.com/sirupsen/logrus"
 
 // ILogger is a logger
@@ -16,6 +18,8 @@ type ILogger interface {
 	Fatalln(args ...interface{})
 	Info(args ...interface{})
 	Infof(format string, args ...interface{})
+	Print(args ...interface{})
+	Printf(format string, args ...interface{})
 	Infoln(args ...interface{})
 	Trace(args ...interface{})
 	Tracef(format string, args ...interface{})
@@ -82,6 +86,12 @@ func (*DiscardLogger) Info(args ...interface{}) {}
 //Infof throws away logmessage
 func (*DiscardLogger) Infof(format string, args ...interface{}) {}
 
+//Print throws away logmessage
+func (*DiscardLogger) Print(args ...interface{}) {}
+
+//Printf throws away logmessage
+func (*DiscardLogger) Printf(format string, args ...interface{}) {}
+
 //Infoln throws away logmessage
 func (*DiscardLogger) Infoln(args ...interface{}) {}
 
@@ -114,7 +124,7 @@ func (*DiscardLogger) Warnln(args ...interface{}) {}
 
 //NewDiscardLogger makes a discard logger
 func NewDiscardLogger() ILogger {
-	return new(DiscardLogger)
+	return &DiscardLogger{}
 }
 
 // SnmpLoggerAdapter adapts a logger to gosnmp. wraps logger as trace

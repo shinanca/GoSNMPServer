@@ -16,7 +16,7 @@ before_install:
  - export CODECOV_TOKEN="81d96f00-26df-40dd-8286-58b96fd92963"
 
 install:
- - go get -u github.com/slayercat/gosnmp
+ - go get -u github.com/gosnmp/gosnmp
  - go get github.com/stretchr/testify/assert
  - go get -u golang.org/x/tools/cmd/goimports
 
@@ -25,7 +25,7 @@ script:
  - go test  -coverpkg ./...   -v ./... 
                         -coverprofile=tCoverage1.txt -covermode=atomic
  - cat tCoverage*.txt > coverage.txt
- - go build github.com/slayercat/GoSNMPServer/cmd/gosnmpserver
+ - go build github.com/shinanca/GoSNMPServer/cmd/gosnmpserver
 
 after_success:
  - bash <(curl -s https://codecov.io/bash)

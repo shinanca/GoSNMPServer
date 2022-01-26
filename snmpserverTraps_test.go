@@ -6,9 +6,9 @@ import (
 	"testing"
 	"time"
 
+	"github.com/gosnmp/gosnmp"
 	"github.com/pkg/errors"
 	"github.com/sirupsen/logrus"
-	"github.com/slayercat/gosnmp"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
 )
@@ -133,7 +133,7 @@ func (suite *TrapTests) TestTraps() {
 	})
 	suite.Run("Trap V3", func() {
 
-		// refer: https://github.com/soniah/gosnmp/issues/145
+		// refer: https://github.com/gosnmp/gosnmp/issues/145
 		client := &gosnmp.GoSNMP{
 			Target:        "127.0.0.1",
 			Port:          uint16(serverAddress.Port),
